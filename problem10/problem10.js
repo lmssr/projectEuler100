@@ -1,22 +1,29 @@
-
 function primeSummation(n) {
-  let arr = [];
-  for(let i = 2; i < n; i++) {
-    for(let j = 2; j <= i; j++) {
-      if(i===j){
-        arr.push(i)
-      }
-      if(i%j===0) {
-        break
+
+  let nums = []
+  let sum = 0;
+
+
+  const upperBound = Math.ceil(Math.sqrt(n));
+
+  for (let i = 0; i < n; i++){
+    nums.push(i);
+  }
+  nums[1] = 0;
+
+  for (let i = 2; i <= upperBound; i++){
+    if (nums[i] !== 0){
+      for (let j = i*i; j < n; j += i){
+        if (nums[j] % i == 0) {
+          nums[j] = 0;
+        }
       }
     }
   }
-  return arr.reduce(function(x,y){return x+y})
+
+  for (let i = 0; i < n; i++){
+    sum += nums[i];
+  }
+  return sum;
 }
-
-
-primeSummation(2000000);
-
-
-
 primeSummation(2000000);
